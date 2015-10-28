@@ -1,0 +1,95 @@
+#UNSUPPORTED UNLIMITED
+
+if (e.DataPoint != null)
+{
+
+if (DropDownList4.Text != null)
+{
+//navigate to dupes (split claim code)
+ParameterInfoCollection params = new ParameterInfoCollection();
+
+    ParameterInfo param;
+
+    param = new ParameterInfo();
+    param.ParameterName = "EEOCRegion";
+    param.GrainLevel = e.GrainLevel;
+    {
+        DashboardFilterValueData filterData = new DashboardFilterValueData();
+        Collection<object> keyValues = e.GetDataPointAxisKeyValues();
+        if (keyValues.Count > 0)
+        {
+            filterData.SingleValue = keyValues[0];
+        }
+        else
+        {
+            filterData.SingleValue = e.GetDataPointAxisValue();
+        }
+        param.FilterValues.Add(filterData);
+    }
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "ChargeStatus";
+    param.GrainLevel = ChargeStatus.GrainLevel;
+    ChargeStatus.CopyFilterValuesTo(param);
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "SplitClaim";
+    param.GrainLevel = ClaimCodeSplit.GrainLevel;
+    ClaimCodeSplit.CopyFilterValuesTo(param);
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "Location";
+    param.GrainLevel = State.GrainLevel;
+    State.CopyFilterValuesTo(param);
+    params.Add(param);
+    services.NavigateToDashboard("c94cdb45-1eb1-4368-b52b-ddb46d9cbf4e", params);
+}
+else
+{
+//navigate no dupes 
+ParameterInfoCollection params = new ParameterInfoCollection();
+
+    ParameterInfo param;
+
+    param = new ParameterInfo();
+    param.ParameterName = "EEOCRegion";
+    param.GrainLevel = e.GrainLevel;
+    {
+        DashboardFilterValueData filterData = new DashboardFilterValueData();
+        Collection<object> keyValues = e.GetDataPointAxisKeyValues();
+        if (keyValues.Count > 0)
+        {
+            filterData.SingleValue = keyValues[0];
+        }
+        else
+        {
+            filterData.SingleValue = e.GetDataPointAxisValue();
+        }
+        param.FilterValues.Add(filterData);
+    }
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "ChargeStatus";
+    param.GrainLevel = ChargeStatus.GrainLevel;
+    ChargeStatus.CopyFilterValuesTo(param);
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "Location";
+    param.GrainLevel = State.GrainLevel;
+    State.CopyFilterValuesTo(param);
+    params.Add(param);
+
+    param = new ParameterInfo();
+    param.ParameterName = "UnitDesignation";
+    param.GrainLevel = 3MBusinessGroup.GrainLevel;
+    3MBusinessGroup.CopyFilterValuesTo(param);
+    params.Add(param);
+    services.NavigateToDashboard("b8991880-c1a0-4934-ab93-e5cd71134b8a", params);
+}
+
+}

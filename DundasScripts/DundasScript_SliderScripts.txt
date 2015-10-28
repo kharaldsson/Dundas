@@ -1,0 +1,52 @@
+/* Slider Scripts */
+
+//Step 1: Create UpdateChart Script and add to Interactions List//
+
+object slider = Slider1;
+object chart = BarChart1;
+
+Label1.Text = Slider1.Value.ToString();
+
+{
+    for (int i=0;i<chart.Series[0].Points.Count;i++)
+    {
+        if (i<slider.Value)
+        {
+            chart.Series[0].Points[i].Visibility = Visibility.Visible;
+        }
+        else
+        {
+            chart.Series[0].Points[i].Visibility = Visibility.Collapsed;
+        }
+    }
+}
+
+//Step 2: Add this script to Load Interactions//
+
+Slider1.Maximum = 30;
+Slider1.Value = 5;
+services.RunDashboardInteraction("UpdateChart1", sender, new DashboardEventArgs());
+
+//Step 3: Add this script to Slider Value Changed interaction//
+
+services.RunDashboardInteraction("UpdateChart1", sender, e);
+
+//Step 4: Create Filter Button//
+
+foreach (DashboardParameter dp in services.CurrentDashboard.DashboardParameters)
+{
+    string name = dp.Name;
+   
+    if(name == "filter1" || dp.Name == "filter2" || dp.Name == "filter3" || dp.Name == "filter4")
+    {
+        DashboardFilterValueData filter = new DashboardFilterValueData();
+        filter.NamedTokenValue = NamedToken.All;
+        dp.FilterValues.Clear();
+        dp.FilterValues.Add(filter);
+        dp.InvalidateFilter(); 
+    }
+}
+
+Slider1.Maximum = 30;
+Slider1.Value = 5;
+services.RunDashboardInteraction("UpdateChart1", sender, new DashboardEventArgs());
