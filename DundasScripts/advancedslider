@@ -1,0 +1,174 @@
+#UNSUPPORTED UNLIMITED
+
+object slider = Slider1;
+object chart = BarChart1;
+
+Label3.Text = Slider1.Value.ToString();
+
+List<string> categories = new List<string>();
+
+//Check to see how many series are available
+if (BarChart1.Series.Count == 3)
+{
+	//Get categories from serie 1
+	for (int i=0; i < chart.Series[0].Points.Count; i++)
+	{
+		if (i < slider.Value)
+		{
+			categories.Add(chart.Series[0].Points[i].XValue);
+		}
+	}
+
+	//If not enough categories in serie 1 get additional categories from serie 2
+	if(categories.Count < slider.Value)
+	{
+		for (int i=0; i < chart.Series[1].Points.Count; i++)
+		{
+			if (categories.Count < slider.Value && !categories.Contains(chart.Series[1].Points[i].XValue))
+			{
+				categories.Add(chart.Series[1].Points[i].XValue);
+			}
+		}
+	}
+
+	//If not enough categories in series 1 and 2 get additional categories from serie 3
+	if(categories.Count < slider.Value)
+	{
+		for (int i=0; i < chart.Series[2].Points.Count; i++)
+		{
+			if (categories.Count < slider.Value && !categories.Contains(chart.Series[2].Points[i].XValue))
+			{
+				categories.Add(chart.Series[2].Points[i].XValue);
+			}
+		}
+	}
+	//End get categories
+
+	//Hide Points in each serie
+	{
+		for (int i=0; i < chart.Series[0].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[0].Points[i].XValue))
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+
+	{
+		for (int i=0; i < chart.Series[1].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[1].Points[i].XValue))
+			{
+				chart.Series[1].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[1].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+
+	{
+		for (int i=0; i < chart.Series[2].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[2].Points[i].XValue))
+			{
+				chart.Series[2].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[2].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+	//End Hide
+}
+else if (BarChart1.Series.Count == 2)
+{
+	//Get categories from serie 1
+	for (int i=0; i < chart.Series[0].Points.Count; i++)
+	{
+		if (i < slider.Value)
+		{
+			categories.Add(chart.Series[0].Points[i].XValue);
+		}
+	}
+
+	//If not enough categories in serie 1 get additional categories from serie 2
+	if(categories.Count < slider.Value)
+	{
+		for (int i=0; i < chart.Series[1].Points.Count; i++)
+		{
+			if (categories.Count < slider.Value && !categories.Contains(chart.Series[1].Points[i].XValue))
+			{
+				categories.Add(chart.Series[1].Points[i].XValue);
+			}
+		}
+	}
+
+	//End get categories
+
+	//Hide Points in each serie
+	{
+		for (int i=0; i < chart.Series[0].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[0].Points[i].XValue))
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+
+	{
+		for (int i=0; i < chart.Series[1].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[1].Points[i].XValue))
+			{
+				chart.Series[1].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[1].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+
+	//End Hide
+}
+else if (BarChart1.Series.Count == 1)
+{
+	//Get categories from serie 1
+	for (int i=0; i < chart.Series[0].Points.Count; i++)
+	{
+		if (i < slider.Value)
+		{
+			categories.Add(chart.Series[0].Points[i].XValue);
+		}
+	}
+	}
+	//End get categories
+
+	//Hide Points in each serie
+	{
+		for (int i=0; i < chart.Series[0].Points.Count; i++)
+		{
+			if (categories.Contains(chart.Series[0].Points[i].XValue))
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Visible;
+			}
+			else
+			{
+				chart.Series[0].Points[i].Visibility = Visibility.Collapsed;
+			}
+		}
+	}
+	//End Hide
