@@ -1,0 +1,17 @@
+//use as an On Load interaction and a Parameter Change interaction
+
+//get data label difference. Can simply create a calculation in a data label. Can also just apply in the code by calculating diff between DataLabel controls
+float difference = float.Parse(DataLabel1.Text);
+
+//Conditional for determining whether image should appear or not. DownArrow is an image used instead of the OOTB state indicator.
+if(difference > 0)
+{
+    DownArrow.Visibility = Visibility.Collapsed;
+    UpArrow.Visibility = Visibility.Visible;
+}
+
+else if(difference < 0)
+{
+    DownArrow.Visibility = Visibility.Visible;
+    UpArrow.Visibility = Visibility.Collapsed;
+}
