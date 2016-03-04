@@ -1,7 +1,7 @@
 //use as an On Load interaction and a Parameter Change interaction
 
-//get data label difference. Can simply create a calculation in a data label. Can also just apply in the code by calculating diff between DataLabel controls
-float difference = float.Parse(DataLabel1.Text);
+//get data label difference. Can simply create a calculation in a data label. Can also just apply in the code by calculating diff between //DataLabelLastYear and DataLabelThisYear controls.
+float difference = float.Parse(DataLabelCalculated.Text);
 
 //Conditional for determining whether image should appear or not. DownArrow is an image used instead of the OOTB state indicator.
 if(difference > 0)
@@ -15,3 +15,7 @@ else if(difference < 0)
     DownArrow.Visibility = Visibility.Visible;
     UpArrow.Visibility = Visibility.Collapsed;
 }
+
+
+//Create a Label control with previous period's DataLabel value
+Label1.Text = "Compared to " + DataLabelLastYear.Text.ToString() + " last year.";
